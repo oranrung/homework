@@ -39,8 +39,6 @@ public class week1 {
                    obj.no = Integer.parseInt(arr[0]);
                    obj.sale = arr[1];
                    obj.detail = arr[2];
-                  // obj.sale = arr[1].replaceAll("[\\'\\;]", "");
-                   //obj.detail = arr[2].replaceAll("[\\'\\;]", "");
                    hMap.put(obj.no, obj);
                    lMap.put(obj.no, obj);
                    tMap.put(obj.no, obj);
@@ -51,7 +49,41 @@ public class week1 {
                 e.printStackTrace();
         }
         
-        int[] num = {20,3000,12000,30000,45000,60000,67000};
+        int[] num = {20,3000,12000,30000,45000,60000,67000,800000};
+        
+         System.out.println("================compare hash================");
+        for (int i = 0; i < num.length; i++) {
+            
+            try {
+                System.out.println("find : "+num[i]);
+                        
+                long start = System.nanoTime();
+                week1 hm = hMap.get(num[i]);
+                long end = System.nanoTime();
+                long elapsedTime = end - start;
+                double second = (double)elapsedTime / 1_000_000_000.0;
+                System.out.print("HashMap Time= "+new DecimalFormat("#.##########").format(second)+" second");
+                long start2 = System.nanoTime();
+                week1 lm = lMap.get(num[i]);
+                long end2 = System.nanoTime();
+                long elapsedTime2 = end2 - start2;
+                double second2 = (double)elapsedTime2 / 1_000_000_000.0;
+                System.out.print(", LinkedHashMap  Time= "+new DecimalFormat("#.##########").format(second2)+" second");
+                
+                long start3 = System.nanoTime();
+                week1 tm = tMap.get(num[i]);
+                long end3 = System.nanoTime();
+                long elapsedTime3 = end3 - start3;
+                double second3 = (double)elapsedTime3 / 1_000_000_000.0;
+                System.out.print(", TreeMap Time= "+new DecimalFormat("#.##########").format(second3)+" second");
+                System.out.println("");
+                     
+            } catch (Exception e) {
+             
+                System.out.println("Not found : id="+num[i]);
+            }
+        }
+        
         System.out.println("================HashMap================");
         for (int i = 0; i < num.length; i++) {
             long start = System.nanoTime();
